@@ -1,0 +1,47 @@
+Launch Cisco Packet Tracer.
+
+Add devices to workspace: PC, Wireless Router, Cable Modem, Internet Cloud, Cisco.com Server, Laptop.
+
+Rename devices via device Config → Display Name if you want clearer labels.
+
+Connect PC Ethernet0 → Wireless Router Ethernet1 with a copper straight-through cable.
+
+Connect Wireless Router Internet → Cable Modem Port1 with a copper straight-through cable.
+
+Connect Cable Modem Port0 → Internet Cloud coaxial port with a coaxial cable.
+
+Connect Internet Cloud Ethernet → Cisco.com Server FastEthernet0 with a copper straight-through cable.
+
+Open Wireless Router → GUI → Wireless and set SSID to HomeNetwork.
+
+In Router GUI → Setup enable DHCP and set DNS server to 208.67.220.220, then Save Settings.
+
+On Laptop → Physical: power off, remove Ethernet module, install WPC300N wireless module, power on.
+
+On Laptop → Desktop → PC Wireless → Connect to HomeNetwork.
+
+On PC → Desktop → IP Configuration select DHCP.
+
+On PC → Desktop → Command Prompt run ipconfig /all to verify a 192.168.0.x address.
+
+On Internet Cloud → Physical add PT-CLOUD-NM-1CX and PT-CLOUD-NM-1CFE modules if missing.
+
+On Internet Cloud → Config → Connections add From: Coaxial To: Ethernet (click Add).
+
+On Internet Cloud → Config → Ethernet set Provider Network to Cable.
+
+On Cisco.com Server → Services → DHCP: turn On, Pool name DHCPpool, Default GW 208.67.220.220, DNS 208.67.220.220, Start IP 208.67.220.1, Mask 255.255.255.0, Max Users 50, then Add.
+
+On Cisco.com Server → Services → DNS: turn On, add A record Cisco.com → 208.67.220.220, then Add.
+
+On Cisco.com Server → Config → Settings set Global to Static, Gateway 208.67.220.1, DNS 208.67.220.220.
+
+On Cisco.com Server → Config → FastEthernet set Static IP 208.67.220.220 and Subnet Mask 255.255.255.0.
+
+On PC → Command Prompt run ipconfig /release then ipconfig /renew to refresh DHCP settings.
+
+From PC Command Prompt run ping Cisco.com and confirm four replies.
+
+Save your Packet Tracer file: File → Save As → choose folder → name .pkt → Save.
+
+Close Packet Tracer (File → Exit or click X).
