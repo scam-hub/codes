@@ -1,3 +1,7 @@
+#install ftp&telnet in client
+sudo apt install ftp
+sudo apt install telnet
+
 ------------------------ FTP commands ------------------------
 sudo apt-get install vsftpd
 
@@ -13,6 +17,10 @@ sudo systemctl restart vsftpd (If any error occurs after this command, then type
 sudo systemctl status vsftpd
 
 ftp <hostname>
+
+#some commands:
+get <filename>
+put <filename>
 
 ---------------------- Telnet commands ----------------------
 
@@ -39,3 +47,16 @@ sudo systemctl status xinetd
 sudo ufw allow 23/tcp
 
 telnet <hostname>
+
+| Purpose                | Command                 |
+| ---------------------- | ----------------------- |
+| Show current folder    | `pwd`                   |
+| List files             | `ls`                    |
+| Change folder          | `cd foldername`         |
+| View a text file       | `cat filename.txt`      |
+| Open file in editor    | `nano filename.txt`     |
+| View running processes | `ps`                    |
+| Copy a file            | `cp source destination` |
+| Move/Rename file       | `mv old new`            |
+| Delete file            | `rm filename`           |
+| Create file            | `touch filename.txt`    |
