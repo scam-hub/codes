@@ -1,0 +1,75 @@
+Socket 
+
+server:
+
+import socket
+import threading
+
+def receive_messages(conn):
+    while True:
+        try:
+            data = conn.recv(1024).decode()
+            if not data:
+                break
+            print(f"\rClient: {data}\nServer: ", end="")
+        except:
+            break
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = socket.gethostname()  # or '0.0.0.0' for LAN
+port = 12345
+
+server.bind((host, port))
+server.listen(1)
+print("Server is waiting for connection...")
+
+conn, addr = server.accept()
+print("Connected with:", addr)
+
+thread = threading.Thread(target=receive_messages, args=(conn,), daemon=True)
+thread.start()
+
+while True:
+    msg = input("Server: ")
+    if msg.lower() == "exit":
+        conn.send("Server has left the chat.".encode())
+        conn.close()
+        server.close()
+        print("Chat ended.")
+        break
+    conn.send(msg.encode())
+
+
+client:
+
+import socket
+import threading
+
+def receive_messages(client):
+    while True:
+        try:
+            data = client.recv(1024).decode()
+            if not data:
+                break
+            print(f"\rServer: {data}\nClient: ", end="")
+        except:
+            break
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = input("Enter server IP or hostname: ")
+port = 12345
+
+client.connect((host, port))
+print("Connected to server. You can start chatting now!")
+
+thread = threading.Thread(target=receive_messages, args=(client,), daemon=True)
+thread.start()
+
+while True:
+    msg = input("Client: ")
+    if msg.lower() == "exit":
+        client.send("Client has left the chat.".encode())
+        client.close()
+        print("Chat ended.")
+        break
+    client.send(msg.encode())
