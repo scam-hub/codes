@@ -1,0 +1,47 @@
+import socket
+ 
+# Create socket
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ 
+# Bind server to host and port
+server_socket.bind(("127.0.0.1", 5000))
+server_socket.listen(1)
+ 
+print("Server started. Waiting for client to connect...")
+conn, addr = server_socket.accept()
+print(f"Client connected from {addr}")
+ 
+while True:
+    # Receive message from client
+    client_msg = conn.recv(1024).decode()
+    if not client_msg:
+        break
+    print("Client:", client_msg)
+ 
+    # Send reply to client
+    server_msg = input("You: ")
+    conn.send(server_msg.encode())
+ 
+conn.close()
+server_socket.close()
+ 
+#client
+import socket
+ 
+# Create socket
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ 
+# Connect to server
+client_socket.connect(("127.0.0.1", 5000))
+print("Connected to server!")
+ 
+while True:
+    # Send message to server
+    msg = input("You: ")
+    client_socket.send(msg.encode())
+ 
+    # Receive reply
+    reply = client_socket.recv(1024).decode()
+    print("Server:", reply)
+ 
+client_socket.close()
