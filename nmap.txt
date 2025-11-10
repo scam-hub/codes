@@ -1,0 +1,41 @@
+1) Basic Ping Scan
+
+Check which hosts are online.
+
+nmap -sn 192.168.1.0/24
+
+2) Basic Port Scan
+
+Scan common ports on a target:
+
+nmap 192.168.1.10
+
+3) Scan Specific Ports
+
+nmap -p 22,80,443 192.168.1.10
+
+4) Scan All 65535 Ports
+
+nmap -p- 192.168.1.10
+
+5) Service Version Detection
+
+Find what services + versions are running:
+
+nmap -sV 192.168.1.10
+
+6) Operating System Detection
+
+nmap -O 192.168.1.10
+
+7) Aggressive Scan (OS + Service + Script + Traceroute)
+
+nmap -A 192.168.1.10
+
+8) Stealth Scan (SYN Scan)
+
+nmap -sS 192.168.1.10
+
+9) Scan Entire Network with OS + Services
+
+nmap -A 192.168.1.0/24
